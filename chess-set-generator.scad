@@ -5,7 +5,9 @@ headoffset=[-1,-2,0];
 headscale=[1,1,1];
 headtilt=[-10,0,0];
 
-part="rook"; // [king:One King,queen:One Queen,bishop:One Bishop,knight:One Knight,rook:One Rook,pawn:One Pawn,bishops:Two Bishops,knights:Two knights,rooks:Two Rooks,pawns:Eight Pawns,set:Entire Set,board:Generate Board]
+randomAttitude=true;
+
+part="pawns"; // [king:One King,queen:One Queen,bishop:One Bishop,knight:One Knight,rook:One Rook,pawn:One Pawn,pawns:Eight Pawns,set:Entire Set,board:Generate Board]
 
 // Size of the board squares. 
 // 50.8mm=2in (one of many) official size
@@ -30,21 +32,15 @@ module print_parts() {
       rook();
    } else if (part=="pawn") {
       pawn();
-   } else if (part=="bishops") {
-      bishop();
-      translate([size,0,0]) bishop();      
-   } else if (part=="knights") {
-      knight();
-      translate([size,0,0]) knight();
-   } else if (part=="rooks") {
-      rook();
-      translate([size,0,0]) rook();
    } else if (part=="pawns") {
-      for (x=[0:size:3*size]) {
+      for (x=[0:size:2*size]) {
          translate([x+(size*0.5),size*0.75,0]) pawn();
       }
-      for (x=[0*size:size:3*size]) {
+      for (x=[0*size:size:2*size]) {
          translate([x+(size*0.5),(size*0.75)+size,0]) pawn();
+      }
+      for (x=[0*size:size:1*size]) {
+         translate([x+(size),(size*0.75)+size*2,0]) pawn();
       }
    } else if (part=="set") {
       set();
@@ -107,7 +103,7 @@ module pawnBody() {
 }
 
 module rookBody() {
-       rotate_extrude($fn=128,convexity=10) translate([8,0,0]) polygon([[-8,6],[-8,-37],[7,-37/*1:0,0,0,0*/] ,[7,-35.99] ,[7,-34.97],[7,-34/*1:0,0,0,0*/] ,[5.97,-34] ,[4.95,-34] ,[3.95,-34],[3,-34/*1:1,0,1,0*/] ,[3.98,-33.77] ,[4.9,-33.35] ,[5.77,-32.73] ,[6.37,-31.93] ,[6.49,-30.9] ,[6.01,-29.95] ,[5.23,-29.18],[5,-29/*1:4,-3,-4,1*/] ,[3.99,-28.7] ,[3.03,-28.28] ,[2.16,-27.67] ,[1.46,-26.85] ,[0.96,-25.89] ,[0.61,-24.82] ,[0.4,-23.84] ,[0.24,-22.71] ,[0.14,-21.61] ,[0.07,-20.6] ,[0.03,-19.5] ,[0.01,-18.3] ,[0,-17.27],[0,-17/*1:0,-9,0,1*/] ,[0,-15.94] ,[0,-14.88] ,[0,-13.86] ,[0,-12.76] ,[0,-11.74] ,[0,-10.72] ,[0,-9.61] ,[0,-8.61] ,[0,-7.57],[0,-7/*1:0,-2,0,0*/] ,[0.78,-6.37] ,[1.62,-5.71] ,[2.43,-5.06] ,[3.24,-4.41] ,[4.04,-3.77] ,[4.83,-3.13],[5,-3/*1:0,0,0,0*/] ,[5,-1.98] ,[5,-0.94] ,[5,0.17] ,[5,1.23] ,[5,2.31] ,[5,3.34] ,[5,4.39] ,[5,5.45],[5,6/*1:0,0,0,0*/] ,[3.98,6] ,[2.95,6] ,[1.91,6] ,[0.9,6],[0,6]]);
+       rotate_extrude($fn=128,convexity=10) translate([8,0,0]) polygon([[-8,6],[-8,-37/*1:0,0,0,0*/] ,[-6.9,-37] ,[-5.85,-37] ,[-4.74,-37] ,[-3.71,-37] ,[-2.6,-37] ,[-1.43,-37] ,[-0.24,-37] ,[0.96,-37] ,[2.14,-37] ,[3.27,-37] ,[4.34,-37] ,[5.5,-37] ,[6.63,-37] ,[7.63,-37],[8,-37/*1:0,0,0,0*/] ,[8,-35.99] ,[8,-34.97],[8,-34/*1:0,0,0,0*/] ,[6.97,-34] ,[5.95,-34] ,[4.95,-34],[4,-34/*1:1,0,1,0*/] ,[4.98,-33.72] ,[5.84,-33.19] ,[6.51,-32.41] ,[6.74,-31.4] ,[6.4,-30.44] ,[5.73,-29.61],[5,-29/*1:4,-3,-4,1*/] ,[4.01,-28.7] ,[3.05,-28.23] ,[2.26,-27.54] ,[1.74,-26.68] ,[1.42,-25.67] ,[1.22,-24.56] ,[1.12,-23.53] ,[1.06,-22.53] ,[1.03,-21.41] ,[1.01,-20.38] ,[1,-19.26] ,[1,-18.05],[1,-17/*1:0,-9,0,1*/] ,[1,-15.94] ,[1,-14.88] ,[1,-13.86] ,[1,-12.76] ,[1,-11.74] ,[1,-10.72] ,[1,-9.61] ,[1,-8.61] ,[1,-7.57],[1,-7/*1:0,-2,0,0*/] ,[1.78,-6.37] ,[2.62,-5.71] ,[3.43,-5.06] ,[4.24,-4.41] ,[5.04,-3.77] ,[5.83,-3.13],[6,-3/*1:0,0,0,0*/] ,[6,-1.98] ,[6,-0.94] ,[6,0.17] ,[6,1.23] ,[6,2.31] ,[6,3.34] ,[6,4.39] ,[6,5.45],[6,6/*1:0,0,0,0*/] ,[4.99,6] ,[3.97,6] ,[2.91,6] ,[1.86,6] ,[0.81,6],[0,6]]);
 
 
 
@@ -227,7 +223,7 @@ module bishop() {
 }   
 module pawn() {
    translate([0,0,26.4]) scale(.6) pawnBody();
-   translate([0,-1,28]) rotate([-10,0,0]) head(.7);
+   translate([0,-1,28]) head(.7);
 }   
 
 
@@ -301,7 +297,11 @@ module board() {
 
 module head(s=1) {
    if (headfile!="") {
-      rotate(headtilt) scale(s) translate(headoffset) scale(headscale) import(headfile);
+      if (randomAttitude==true) {
+         rotate([rands(-10,10,1)[0],rands(-8,8,1)[0],0]) rotate(headtilt) scale(s) translate(headoffset) scale(headscale) import(headfile);         
+      } else {
+         rotate(headtilt) scale(s) translate(headoffset) scale(headscale) import(headfile);
+      }
    } else {
       scale(s) translate([0,0,15]) sphere(15,center=true);
    }
