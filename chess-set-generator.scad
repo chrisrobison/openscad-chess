@@ -1,16 +1,20 @@
 $fn=128;
 
-headfile="head-patrick.stl";
-headoffset=[-1,-2,0];
-headscale=[1,1,1];
-headtilt=[-10,0,0];
+headfile="head-bill.stl";
+headoffset=[0.00,0.00,0.00];
+headscale=[1.00,1.00,1.00];
+headtilt=[0.00,0.00,0.00];
 
-randomAttitude=true;
+hatoffset=[0.00,1.00,0.00];
+hatscale=[1.00,1.00,1.00];
+hattilt=[0.00,0.00,0.00];
 
-part="pawns"; // [king:One King,queen:One Queen,bishop:One Bishop,knight:One Knight,rook:One Rook,pawn:One Pawn,pawns:Eight Pawns,set:Entire Set,board:Generate Board]
+randomAttitude=false;
+
+part="king"; // [king:One King,queen:One Queen,bishop:One Bishop,knight:One Knight,rook:One Rook,pawn:One Pawn,pawns:Eight Pawns,set:Entire Set,board:Generate Board]
 
 // Size of the board squares. 
-// 50.8mm=2in (one of many) official size
+//                                                                                         
 // Pieces designed based on 50.8mm board size and scaled accordingly
 // if another board size is specified.
 size=50.8;
@@ -206,19 +210,19 @@ module shield() {
 module king() {
    translate([0,0,37]) royalty();
    translate([.5,-3,70])  rotate([-5,0,0]) head(.8);
-   translate([1,1,93]) rotate([-15,0,0]) scale(.45) scale([1,1.2,1.2]) kingHat();
+   translate(hatoffset) rotate(hattilt) scale(hatscale) translate([0,2,93]) rotate([-15,0,0]) scale(.45) scale([1,1.2,1.2]) kingHat();
 }
 
 module queen() {
    translate([0,0,35]) scale(.9) royalty();
    translate([-1,-2,64]) rotate([-5,5,-0]) head(.7);
-   translate([1,2,84]) rotate([-20,0,0]) scale(.35) scale([.9,1.1,1]) queenHat();   
+    translate(hatoffset) rotate(hattilt) scale(hatscale) translate([0,2,84]) rotate([-20,0,0]) scale(.35) scale([1,1.1,1]) queenHat();   
 }
 
 module bishop() {
    translate([0,0,31]) scale([.7,.7,.7]) subject();
    translate([-1,-2,40]) rotate([-5,0,0]) head(.8);
-   translate([0,-5,80]) rotate([-20,0,0]) rotate([0,0,180]) scale([.35,.5,.4]) scale([1.3,2,1]) hat();   
+    translate(hatoffset) rotate(hattilt) scale(hatscale) translate([0,-5,80]) rotate([-20,0,0]) rotate([0,0,180]) scale([.35,.5,.4]) scale([1.3,2,1]) hat();   
 
 }   
 module pawn() {
