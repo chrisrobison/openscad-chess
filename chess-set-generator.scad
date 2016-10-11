@@ -1,11 +1,11 @@
 $fn=128;
 
-headfile="head-bill.stl";
-headoffset=[0.00,0.00,0.00];
+headfile="head-clinton.stl";
+headoffset=[0.00,5.00,2.00];
 headscale=[1.00,1.00,1.00];
 headtilt=[0.00,0.00,0.00];
 
-hatoffset=[0.00,1.00,0.00];
+hatoffset=[0.00,3.00,0.00];
 hatscale=[1.00,1.00,1.00];
 hattilt=[0.00,0.00,0.00];
 
