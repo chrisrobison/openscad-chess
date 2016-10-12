@@ -1,12 +1,12 @@
 $fn=128;
 
-headfile="head-clinton.stl";
-headoffset=[0.00,5.00,2.00];
+headfile="head-trump.stl";
+headoffset=[0.00,2.00,0.00];
 headscale=[1.00,1.00,1.00];
 headtilt=[0.00,0.00,0.00];
 
-hatoffset=[0.00,3.00,0.00];
-hatscale=[1.00,1.00,1.00];
+hatoffset=[1.00,1.00,-7.00];
+hatscale=[1.10,1.10,1.10];
 hattilt=[0.00,0.00,0.00];
 
 randomAttitude=false;
