@@ -1,17 +1,17 @@
 $fn=128;
 
-headfile="head-trump.stl";
-headoffset=[0.00,2.00,0.00];
+headfile="head-hillary.stl";
+headoffset=[0.00,2.00,2.00];
 headscale=[1.00,1.00,1.00];
 headtilt=[0.00,0.00,0.00];
 
-hatoffset=[1.00,1.00,-7.00];
-hatscale=[1.10,1.10,1.10];
+hatoffset=[0.00,0.00,2.00];
+hatscale=[1.00,1.00,1.00];
 hattilt=[0.00,0.00,0.00];
 
 randomAttitude=false;
 
-part="king"; // [king:One King,queen:One Queen,bishop:One Bishop,knight:One Knight,rook:One Rook,pawn:One Pawn,pawns:Eight Pawns,set:Entire Set,board:Generate Board]
+part="set"; // [king:One King,queen:One Queen,bishop:One Bishop,knight:One Knight,rook:One Rook,pawn:One Pawn,pawns:Eight Pawns,set:Entire Set,board:Generate Board]
 
 // Size of the board squares. 
 //                                                                                         
@@ -222,7 +222,7 @@ module queen() {
 module bishop() {
    translate([0,0,31]) scale([.7,.7,.7]) subject();
    translate([-1,-2,40]) rotate([-5,0,0]) head(.8);
-    translate(hatoffset) rotate(hattilt) scale(hatscale) translate([0,-5,80]) rotate([-20,0,0]) rotate([0,0,180]) scale([.35,.5,.4]) scale([1.3,2,1]) hat();   
+    translate(hatoffset) rotate(hattilt) scale(hatscale) translate([-1,-5,80]) rotate([-20,0,0]) rotate([0,0,180]) scale([.35,.5,.4]) scale([1.3,2,1]) hat();   
 
 }   
 module pawn() {
@@ -284,15 +284,19 @@ module set() {
       */
    }
 }
-
+$vpd=500;
+$vpr=[ 70.00, 0.00, 0.00 ];
+//$vpt=[ 140.43,15.20, 2.01 ];
+$vpt=[ 223.12, 350.95, 30 ];
+translate([(size*4)-(size/2),(size*8)-(size/2),0]) board();
 module board() { 
    translate([-10,-10,5]) union() {
       translate([size,-size*3,-5]) linear_extrude(4,scale=.95) square([(size*8.5),(size*8.5)],center=true);
       translate([size/2,size/2,0]) union() {
          for (y=[0:7]) {
             for (x=[0:2:7]) {
-               translate([(x*size)-((y%2)*size)-(size*2.5),(y*size)-(size*7.5),-5]) color("Ivory") cube([size,size,5]);
-               translate([(x*size)-(abs((y%2)-1)*size)-(size*2.5),(y*size)-(size*7.5),-5]) color("DimGrey") cube([size,size,5]);
+               translate([(x*size)-((y%2)*size)-(size*2.5),(y*size)-(size*7.5),-5]) color("White") cube([size,size,5]);
+               translate([(x*size)-(abs((y%2)-1)*size)-(size*2.5),(y*size)-(size*7.5),-5]) color("Black") cube([size,size,5]);
             }
          }
       }
